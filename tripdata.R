@@ -1,6 +1,7 @@
 install.packages("tidyverse")
 library(tidyverse)
 library(lubridate)
+library(ggplot2)
 
 #####################################
 
@@ -47,11 +48,23 @@ print("Validated coordinates")
 
 # Determine ride length
 tripdata$ride_length = difftime(tripdata$ended_at, tripdata$started_at)
+tripdata$ride_length = as.numeric(tripdata$ride_length, units="secs")
 
 # Then clean data, by removing any rides with ride lengths are positive
 tripdata = subset(tripdata, ride_length > 0.0)
+# Remove rides longer than three days
+tripdata = subset(tripdata, ride_length < ((60.0 * 60.0) * (24.0 * 3.0)))
 
 # Determine weekdays of trips
 tripdata$day_of_trip = weekdays(tripdata$started_at)
 
-#no_end_loc = subset(tripdata, is.na(tripdata$end_lng))
+# no_end_loc = subset(tripdata, is.na(tripdata$end_lng))
+
+#days = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+condition = c("Member", "Casual")
+#value = abs(rnorm(12 , 0 , 15))
+# = data.frame(days,condition,value)
+
+ggplot(tripdata, aes(y = ride_length, x = day_of_trip)) + 
+  geom_bar(position="dodge", stat="identity")
+
