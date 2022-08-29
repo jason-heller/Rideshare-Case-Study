@@ -2,18 +2,6 @@ install.packages("tidyverse")
 library(tidyverse)
 library(lubridate)
 
-########## init functions ##########
-
-valid_numeric = function(value) {
-  if (!is.na(value))
-    stopifnot(!is.na(as.numeric(value)))
-}
-
-valid_datetime = function(value) {
-  stopifnot(!is.na(as_datetime(value)))
-}
-
-
 #####################################
 
 # Validate ride_id
@@ -46,15 +34,15 @@ tripdata$end_lat    = as.double(tripdata$end_lat)
 tripdata$end_lng    = as.double(tripdata$end_lng)
 
 # Validate datetimes
-valid_datetime(tripdata$started_at)
-valid_datetime(tripdata$ended_at)
+stopifnot(!is.na(as_datetime(tripdata$started_at)))
+stopifnot(!is.na(as_datetime(tripdata$ended_at)))
 print("Validated ride times")
 
 # Validate lat/long
-#valid_numeric(tripdata$start_lat)
-#valid_numeric(tripdata$start_lng)
-#valid_numeric(tripdata$end_lat)
-#valid_numeric(tripdata$end_lng)
+stopifnot(!is.na(as.numeric(tripdata$start_lat)))
+stopifnot(!is.na(as.numeric(tripdata$start_lng)))
+#stopifnot(!is.na(as.numeric(tripdata$end_lat)))
+#stopifnot(!is.na(as.numeric(tripdata$end_lng)))
 print("Validated coordinates")
 
 # Determine ride length
@@ -66,4 +54,4 @@ tripdata = subset(tripdata, ride_length > 0.0)
 # Determine weekdays of trips
 tripdata$day_of_trip = weekdays(tripdata$started_at)
 
-no_end_loc = subset(tripdata, is.na(tripdata$end_lng))
+#no_end_loc = subset(tripdata, is.na(tripdata$end_lng))
