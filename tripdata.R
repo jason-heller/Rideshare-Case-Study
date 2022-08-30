@@ -102,7 +102,8 @@ ggplot(plot_df, aes(x = weekday, y = avg_per_weekday, fill = membership)) +
   geom_col(position="dodge") +
   scale_x_discrete(limits = unique(weekday)) +
   ggtitle("Average Ride Length per Weekday") +
-  labs(x = "Weekday", y = "Avg. Time in Minutes", fill = "Membership")
+  labs(x = "Weekday", y = "Avg. Time in Minutes", fill = "Membership") +
+  scale_fill_manual("legend", values = c("Casual" = "#d9211e", "Member" = "#0d9ee0"))
 
 # Create another graph of total riders per day
 # TODO: Readability
@@ -135,7 +136,8 @@ ggplot(plot_df, aes(x = weekday, y = riders_per_weekday, fill = membership)) +
   geom_col(position="dodge") +
   scale_x_discrete(limits = unique(weekday)) +
   ggtitle("Total Riders per Weekday") +
-  labs(x = "Weekday", y = "Total Riders", fill = "Membership")
+  labs(x = "Weekday", y = "Total Riders", fill = "Membership") +
+  scale_fill_manual("legend", values = c("Casual" = "#d9211e", "Member" = "#0d9ee0"))
 
 # Create a bar graph comparing bike types between rider typers
 bike_type_choice = c(
