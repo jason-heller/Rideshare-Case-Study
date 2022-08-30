@@ -1,6 +1,7 @@
 install.packages("tidyverse")
 library(tidyverse)
 library(lubridate)
+library(dplyr)
 library(ggplot2)
 
 #####################################
@@ -60,11 +61,43 @@ tripdata$day_of_trip = weekdays(tripdata$started_at)
 
 # no_end_loc = subset(tripdata, is.na(tripdata$end_lng))
 
-#days = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
-condition = c("Member", "Casual")
-#value = abs(rnorm(12 , 0 , 15))
-# = data.frame(days,condition,value)
+casual_ride_data = tripdata[which(tripdata$member_casual=="casual"),]#$ride_length
+member_ride_data = tripdata[which(tripdata$member_casual=="member"),]#$ride_length
 
-ggplot(tripdata, aes(y = ride_length, x = day_of_trip)) + 
-  geom_bar(position="dodge", stat="identity")
+# TODO: Readability
+avg_per_weekday = c(
+  mean(casual_ride_data[which(casual_ride_data$day_of_trip == "Sunday"   ),]$ride_length) / 60.0,
+  mean(member_ride_data[which(member_ride_data$day_of_trip == "Sunday"   ),]$ride_length) / 60.0,
+  
+  mean(casual_ride_data[which(casual_ride_data$day_of_trip == "Monday"   ),]$ride_length) / 60.0,
+  mean(member_ride_data[which(member_ride_data$day_of_trip == "Monday"   ),]$ride_length) / 60.0,
+  
+  mean(casual_ride_data[which(casual_ride_data$day_of_trip == "Tuesday"  ),]$ride_length) / 60.0,
+  mean(member_ride_data[which(member_ride_data$day_of_trip == "Tuesday"  ),]$ride_length) / 60.0,
+  
+  mean(casual_ride_data[which(casual_ride_data$day_of_trip == "Wednesday"),]$ride_length) / 60.0,
+  mean(member_ride_data[which(member_ride_data$day_of_trip == "Wednesday"),]$ride_length) / 60.0,
+  
+  mean(casual_ride_data[which(casual_ride_data$day_of_trip == "Thursday" ),]$ride_length) / 60.0,
+  mean(member_ride_data[which(member_ride_data$day_of_trip == "Thursday" ),]$ride_length) / 60.0,
+  
+  mean(casual_ride_data[which(casual_ride_data$day_of_trip == "Friday"   ),]$ride_length) / 60.0,
+  mean(member_ride_data[which(member_ride_data$day_of_trip == "Friday"   ),]$ride_length) / 60.0,
+  
+  mean(casual_ride_data[which(casual_ride_data$day_of_trip == "Saturday" ),]$ride_length) / 60.0,
+  mean(member_ride_data[which(member_ride_data$day_of_trip == "Saturday" ),]$ride_length) / 60.0
+)
+
+weekday = c(rep("Sun", 2), rep("Mon", 2), rep("Tue", 2), rep("Wed", 2), rep("Thu", 2), rep("Fri", 2), rep("Sat", 2))
+membership = rep(c("Casual", "Member"), 7)
+plot_df = data.frame(weekday, membership, avg_per_weekday)
+
+ggplot(plot_df, aes(x = weekday, y = avg_per_weekday, fill = membership)) + 
+  geom_col(position="dodge") +
+  scale_x_discrete(limits = unique(weekday)) +
+  ggtitle("Average Ride Length per Weekday") +
+  labs(x = "Weekday", y = "Avg. Time in Minutes", fill = "Membership")
+
+rm(casual_ride_data)
+rm(member_ride_data)
 
