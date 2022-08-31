@@ -64,8 +64,6 @@ tripdata = subset(tripdata, ride_length < SECS_PER_DAY)
 # Determine weekdays of trips
 tripdata$day_of_trip = weekdays(tripdata$started_at)
 
-# no_end_loc = subset(tripdata, is.na(tripdata$end_lng))
-
 # For use comparing rider data
 casual_ride_data = tripdata[which(tripdata$member_casual == "casual"),]
 member_ride_data = tripdata[which(tripdata$member_casual == "member"),]
