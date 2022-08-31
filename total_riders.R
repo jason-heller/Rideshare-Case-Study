@@ -36,6 +36,7 @@ ggplot(plot_df, aes(x = weekday, y = riders_per_weekday, fill = membership)) +
 
 # Get the total riders per month
 
+total_per_month = c()
 for (x in 1:12) {
   monthly_avg = nrow(casual_ride_data[which(as.integer(format(casual_ride_data$started_at, format = "%m")) == x),])
   total_per_month = append(total_per_month, monthly_avg)
