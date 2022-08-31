@@ -56,7 +56,7 @@ stopifnot(!is.na(as.numeric(tripdata$start_lng)))
 print("Validated coordinates")
 
 # Ensure stations id/names are unique
-
+# TODO
 
 # Determine ride length
 tripdata$ride_length = difftime(tripdata$ended_at, tripdata$started_at)
