@@ -1,9 +1,3 @@
----
-title: "Rideshare Case Study"
-output: html_document
-date: "2022-08-31"
----
-
 # Bike Rideshare Service Case Study
 
 This case study is the capstone project to the Google Data Analytics Professional Certificate program. The data is from a fictional bike service called Cyclistic which aims convert their casual riders (single-ride or single-day subscribers) into annual membership subscribers. The goal is to find how both groups use with the service differently.
