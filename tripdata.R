@@ -1,15 +1,20 @@
+# Init
+
 install.packages("tidyverse")
+install.packages("sf")
 library(tidyverse)
 library(lubridate)
 library(dplyr)
 library(ggplot2)
+library(sf)
 
 #####################################
 
 #options(scipen=2)
 
-# Validate ride_id
-tripdata = subset(tripdata, ride_id != 'ride_id') # Remove some rows I left in from excel
+# Remove duplicate ride_ids
+ind = duplicated(tripdata[,1])
+tripdata = tripdata[!ind,]
 
 # Validate bike types
 test_ride_types = unique(tripdata$rideable_type)
