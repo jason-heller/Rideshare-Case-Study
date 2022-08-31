@@ -21,6 +21,7 @@ test_ride_types = unique(tripdata$rideable_type)
 allowable_types = c("electric_bike", "classic_bike", "docked_bike")
 stopifnot(test_ride_types %in% allowable_types)
 print("Validated rideable types")
+
 rm(test_ride_types)
 rm(allowable_types)
 
@@ -50,9 +51,12 @@ print("Validated ride times")
 # Validate lat/long
 stopifnot(!is.na(as.numeric(tripdata$start_lat)))
 stopifnot(!is.na(as.numeric(tripdata$start_lng)))
-#stopifnot(!is.na(as.numeric(tripdata$end_lat)))
-#stopifnot(!is.na(as.numeric(tripdata$end_lng)))
+#stopifnot(!is.na(as.numeric(tripdata$end_lat)))    # \
+#stopifnot(!is.na(as.numeric(tripdata$end_lng)))    # / Not all have end positions
 print("Validated coordinates")
+
+# Ensure stations id/names are unique
+
 
 # Determine ride length
 tripdata$ride_length = difftime(tripdata$ended_at, tripdata$started_at)
@@ -61,10 +65,8 @@ tripdata$ride_length = as.numeric(tripdata$ride_length, units="secs")
 # Then clean data, by removing any rides with ride lengths are positive
 tripdata = subset(tripdata, ride_length > 0.0)
 
-SECS_PER_DAY = (60 * 60) * 24 # Number of seconds in a day
-
 # Remove rides longer than a day, assuming trips spanning a time longer than this are erroneous
-tripdata = subset(tripdata, ride_length < SECS_PER_DAY)
+tripdata = subset(tripdata, ride_length < (60 * 60) * 24)
 
 # Determine weekdays of trips
 tripdata$day_of_trip = weekdays(tripdata$started_at)

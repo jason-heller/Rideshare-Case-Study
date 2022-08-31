@@ -1,8 +1,4 @@
-my_sf <- st_as_sf(my_df, coords = c('LON', 'LAT')
+geodata = st_as_sf(tripdata, coords = c(tripdata$start_lat, tripdata$start_lng))
+geodata = st_set_crs(tripdata, crs = 4326)
 
-my_sf <- st_set_crs(my_sf, crs = 4326)
-
-#Plot it:
-
-ggplot(my_sf) + 
-  geom_sf(aes(color = cluster))
+ggplot(geodata) + geom_sf(aes(color = cluster))
