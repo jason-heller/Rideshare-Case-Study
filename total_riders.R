@@ -35,13 +35,13 @@ ggplot(plot_df, aes(x = weekday, y = riders_per_weekday, fill = membership)) +
   scale_fill_manual("Legend", values = c("Casual" = "#eb3b3b", "Member" = "#0d9ee0"))
 
 # Get the total riders per month
-total_per_month = c()
+
 for (x in 1:12) {
   monthly_avg = nrow(casual_ride_data[which(as.integer(format(casual_ride_data$started_at, format = "%m")) == x),])
-  total_per_month = append(avg_per_month, monthly_avg)
+  total_per_month = append(total_per_month, monthly_avg)
   
   monthly_avg = nrow(member_ride_data[which(as.integer(format(member_ride_data$started_at, format = "%m")) == x),])
-  total_per_month = append(avg_per_month, monthly_avg)
+  total_per_month = append(total_per_month, monthly_avg)
 }
 
 months = rep(1:12, each=2)
