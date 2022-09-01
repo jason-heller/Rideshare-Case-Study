@@ -13,6 +13,8 @@ library(sf)
 #options(scipen=2)
 
 # Remove duplicate ride_ids
+tripdata = subset(tripdata, tripdata$ride_id != "ride_id")
+
 ind = duplicated(tripdata[,1])
 tripdata = tripdata[!ind,]
 
