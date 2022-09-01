@@ -30,7 +30,7 @@ plot_df = data.frame(weekday, membership, riders_per_weekday)
 ggplot(plot_df, aes(x = weekday, y = riders_per_weekday, fill = membership)) + 
   geom_col(position = "dodge") +
   scale_x_discrete(limits = unique(weekday)) +
-  ggtitle("Total Riders per Weekday") +
+  #ggtitle("Total Riders per Weekday") +
   labs(x = "Weekday", y = "Total Riders", fill = "Membership") +
   scale_fill_manual("Legend", values = c("Casual" = "#eb3b3b", "Member" = "#0d9ee0"))
 
@@ -52,6 +52,6 @@ plot_df = data.frame(months, membership, total_per_month)
 ggplot(plot_df, aes(x = months, y = total_per_month, fill = membership)) + 
   geom_col(position = "dodge") +
   scale_x_discrete(limits = unique(months)) +
-  ggtitle("Total Riders per Month") +
+  #ggtitle("Total Riders per Month") +
   labs(x = "Month", y = "Number of Riders", fill = "Membership") +
   scale_fill_manual("Legend", values = c("Casual" = "#eb3b3b", "Member" = "#0d9ee0"))

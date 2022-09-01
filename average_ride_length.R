@@ -52,7 +52,7 @@ membership = rep(c("Casual", "Member"), 12)
 plot_df = data.frame(months, membership, avg_per_month)
 
 ggplot(plot_df, aes(x = months, y = avg_per_month, fill = membership)) + 
-  geom_col(position = "dodge") +
+  geom_line(aes(color = membership), position = "dodge", size = 1) +
   scale_x_discrete(limits = unique(months)) +
   #ggtitle("Average Ride Length per Month") +
   labs(x = "Month", y = "Avg. Time in Minutes", fill = "Membership") +
