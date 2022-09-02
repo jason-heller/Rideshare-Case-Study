@@ -50,7 +50,7 @@ membership = rep(c("Casual", "Member"), 12)
 plot_df = data.frame(months, membership, total_per_month)
 
 ggplot(plot_df, aes(x = months, y = total_per_month, fill = membership)) + 
-  geom_col(position = "dodge") +
+  geom_line(aes(color = membership), position = "dodge", size = 2) +
   scale_x_discrete(limits = unique(months)) +
   #ggtitle("Total Riders per Month") +
   labs(x = "Month", y = "Number of Riders", fill = "Membership") +
