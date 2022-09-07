@@ -1,4 +1,5 @@
-# TODO: Move
+stopifnot(exists("casual_ride_data"))
+stopifnot(exists("member_ride_data"))
 # Create a bar graph comparing bike types between rider typers
 
 types = c("classic_bike", "electric_bike", "docked_bike")

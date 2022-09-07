@@ -1,3 +1,6 @@
+stopifnot(exists("casual_ride_data"))
+stopifnot(exists("member_ride_data"))
+
 # Create another graph of total riders per day
 # TODO: Readability
 riders_per_weekday = c(

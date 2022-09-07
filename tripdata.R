@@ -1,14 +1,16 @@
 # Init
 
 install.packages("tidyverse")
-install.packages("sf")
-install.packages("mapproj")
+install.packages("maps")
+install.packages("mapdata")
+install.packages("ggmap")
 library(tidyverse)
 library(lubridate)
 library(dplyr)
 library(ggplot2)
-library(sf)
-library(mapproj)
+library(maps)
+library(mapdata)
+library(ggmap)
 
 #####################################
 
@@ -59,8 +61,16 @@ stopifnot(!is.na(as.numeric(tripdata$start_lng)))
 #stopifnot(!is.na(as.numeric(tripdata$end_lng)))    # / Not all have end positions
 print("Validated coordinates")
 
-# Ensure stations id/names are unique
-# TODO
+# Make sure start points make sense
+lat_min = min(tripdata$start_lat)
+lat_max = max(tripdata$start_lat)
+lng_min = min(tripdata$start_lng)
+lng_max = max(tripdata$start_lng)
+
+# Print outliers
+# ...
+
+# There are some outliers, but not many
 
 # Determine ride length
 tripdata$ride_length = difftime(tripdata$ended_at, tripdata$started_at)

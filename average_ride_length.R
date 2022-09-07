@@ -1,3 +1,6 @@
+stopifnot(exists("casual_ride_data"))
+stopifnot(exists("member_ride_data"))
+
 # TODO: Readability
 avg_per_weekday = c(
   mean(casual_ride_data[which(casual_ride_data$day_of_trip == "Sunday"   ),]$ride_length) / 60.0,

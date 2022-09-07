@@ -1,12 +1,26 @@
-#lat_min = min(tripdata$start_lat)
-#lat_max = max(tripdata$start_lat)
-#lng_min = min(tripdata$start_lng)
-#lng_max = max(tripdata$start_lng)
-states = map_data("state", region = "illinois")
+stopifnot(exists("casual_ride_data"))
+stopifnot(exists("member_ride_data"))
 
-ggplot(states, aes(long, lat)) +
-geom_polygon(aes(group = group)) +
-coord_map("albers",  lat0 = 45.75, lat1 = 41.64) +
-  geom_point(data = casual_ride_data, aes(x = 43.234, y = -80.42))
-#geom_point(data = casual_ride_data, aes(x = start_lng, y = start_lat)) + 
-#geom_point(data = member_ride_data, aes(x = start_lng, y = start_lat), color = "blue")
+illinois = map_data('county') %>% 
+  filter(region == 'illinois', subregion == 'cook') %>% 
+  select(lon = long, lat, group, id = subregion)
+
+ggplot(illinois, aes(lon, lat)) + 
+  geom_polygon(size = .25, show.legend = FALSE) +
+  coord_quickmap() +
+  geom_point(data = casual_ride_data, aes(x = start_lng, y = start_lat), color = "#FF0000", size = .75) +
+  geom_point(data = casual_ride_data, aes(x = end_lng, y = end_lat), color = "#CC0000", size = .75) +
+  xlim(-88.35, -87.35) +
+  ylim(41.35, 42.25) +
+  labs(x = "Longitude", y = "Latitude") +
+  ggtitle("Casual Rider Start/End Locations")
+
+ggplot(illinois, aes(lon, lat)) + 
+  geom_polygon(size = .25, show.legend = FALSE) +
+  coord_quickmap() +
+  geom_point(data = member_ride_data, aes(x = start_lng, y = start_lat), color = "#0000FF", size = .75) +
+  geom_point(data = member_ride_data, aes(x = end_lng, y = end_lat), color = "#0000CC", size = .75) +
+  xlim(-88.35, -87.35) +
+  ylim(41.35, 42.25) +
+  labs(x = "Longitude", y = "Latitude") +
+  ggtitle("Membership Rider Start/End Locations")
