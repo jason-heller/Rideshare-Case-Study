@@ -51,12 +51,13 @@ for (x in 1:12) {
 }
 
 months = rep(1:12, each=2)
+months_chr = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 membership = rep(c("Casual", "Member"), 12)
 plot_df = data.frame(months, membership, avg_per_month)
 
 ggplot(plot_df, aes(x = months, y = avg_per_month, fill = membership)) + 
   geom_line(aes(color = membership), position = "dodge", size = 1) +
-  scale_x_discrete(limits = unique(months)) +
+  scale_x_discrete(limits = unique(months), labels = months_chr) +
   #ggtitle("Average Ride Length per Month") +
   labs(x = "Month", y = "Avg. Time in Minutes", fill = "Membership") +
   scale_fill_manual("Legend", values = c("Casual" = "#eb3b3b", "Member" = "#0d9ee0"))
@@ -71,13 +72,18 @@ for (x in 0:23) {
   avg_per_hour = append(avg_per_hour, hourly_avg)
 }
 
-hours = rep(1:24, each=2)
+hours = rep(1:24, each = 2)
+hours_chr = c()
+for (x in 1:12) {
+  hours_chr = append(hours_chr, paste(as.character((x * 2) - 1), "00", sep = ":"))
+  hours_chr = append(hours_chr, "")
+}
 membership = rep(c("Casual", "Member"), 12)
-plot_df = data.frame(months, membership, avg_per_hour)
+plot_df = data.frame(hours, membership, avg_per_hour)
 
 ggplot(plot_df, aes(x = hours, y = avg_per_hour)) + 
   geom_line(aes(color = membership), size = 2) +
-  scale_x_discrete(limits = unique(hours)) +
+  scale_x_discrete(limits = unique(hours), labels = hours_chr) +
   geom_point() +
   labs(x = "Hour", y = "Avg. Time in Minutes", fill = "Membership") +
   scale_fill_manual("Legend", values = c("Casual" = "#eb3b3b", "Member" = "#0d9ee0"))

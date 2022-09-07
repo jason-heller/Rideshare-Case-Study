@@ -48,13 +48,14 @@ for (x in 1:12) {
   total_per_month = append(total_per_month, monthly_avg)
 }
 
+months_chr = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 months = rep(1:12, each=2)
 membership = rep(c("Casual", "Member"), 12)
 plot_df = data.frame(months, membership, total_per_month)
 
 ggplot(plot_df, aes(x = months, y = total_per_month, fill = membership)) + 
   geom_line(aes(color = membership), position = "dodge", size = 2) +
-  scale_x_discrete(limits = unique(months)) +
+  scale_x_discrete(limits = unique(months), labels = months_chr) +
   #ggtitle("Total Riders per Month") +
   labs(x = "Month", y = "Number of Riders", fill = "Membership") +
   scale_fill_manual("Legend", values = c("Casual" = "#eb3b3b", "Member" = "#0d9ee0"))

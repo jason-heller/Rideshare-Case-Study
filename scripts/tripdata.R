@@ -4,6 +4,7 @@ install.packages("tidyverse")
 install.packages("maps")
 install.packages("mapdata")
 install.packages("ggmap")
+install.packages("scales")
 library(tidyverse)
 library(lubridate)
 library(dplyr)
@@ -11,10 +12,11 @@ library(ggplot2)
 library(maps)
 library(mapdata)
 library(ggmap)
+library(scales)
 
 #####################################
 
-#options(scipen=2)
+options(scipen=2)
 
 # Remove duplicate ride_ids
 tripdata = subset(tripdata, tripdata$ride_id != "ride_id")
