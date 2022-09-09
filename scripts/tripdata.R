@@ -7,6 +7,7 @@ install.packages("ggmap")
 install.packages("scales")
 library(tidyverse)
 library(lubridate)
+library(plyr)
 library(dplyr)
 library(ggplot2)
 library(maps)
@@ -94,3 +95,9 @@ member_ride_data = tripdata[which(tripdata$member_casual == "member"),]
 # get a better sense of the data layout
 mean(tripdata$ride_length)
 max(tripdata$ride_length) / 60.0
+
+directory = getwd()
+data_slim = data.frame(id = tripdata$ride_id, start = tripdata$started_at, end = tripdata$ended_at, length = tripdata$ride_length, day = tripdata$day_of_trip)
+write.csv(data_slim, "ride_data.csv")
+
+rm(data_slim)
