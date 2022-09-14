@@ -2,6 +2,8 @@
 
 This case study is the capstone project to the Google Data Analytics Professional Certificate program. The data is from a fictional bike service called Cyclistic which aims convert their casual riders (single-ride or single-day subscribers) into annual membership subscribers. The goal is to find how both groups use with the service differently.
 
+Included in this repo are the scripts I wrote for the data, the visualizations that I created in RStudio, and a powerpoint document presenting the findings.
+
 I have created a visual for my case study on Tableau Public which can be viewed [here](https://public.tableau.com/views/CyclisticData_16629159640350/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link).
 
 The data is supplied by [Divvy](https://www.divvybikes.com/about), and the dataset can be found [here](https://divvy-tripdata.s3.amazonaws.com/index.html).
