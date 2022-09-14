@@ -97,7 +97,7 @@ mean(tripdata$ride_length)
 max(tripdata$ride_length) / 60.0
 
 directory = getwd()
-data_slim = data.frame(id = tripdata$ride_id, start = tripdata$started_at, end = tripdata$ended_at, length = tripdata$ride_length, day = tripdata$day_of_trip)
-write.csv(data_slim, "ride_data.csv")
+out = data.frame(start = tripdata$started_at, end = tripdata$ended_at, length = tripdata$ride_length, type = tripdata$member_casual)
 
-rm(data_slim)
+write.csv(out, "ride_data.csv")
+rm(out)
